@@ -41,7 +41,7 @@ class CatalogService {
    * @returns {Promise<Object|null>} - A promise that resolves to the updated Item object, or null if no item was found
    */
   static async update(itemId, data) {
-    return ItemModel.findByIdAndUpdate(itemId, data).exec();
+    return ItemModel.findByIdAndUpdate(itemId, data, { new: true }).exec();
   }
 
   /**
