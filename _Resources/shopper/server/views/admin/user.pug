@@ -1,0 +1,68 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-12
+      h1
+        | Manage Users
+      
+      if users && users.length
+
+        table.table.table-bordered.table-striped
+          thead
+            th
+              | Email
+            th
+              | Admin Status 
+            th  
+              | Action
+
+          tbody
+            each user in users
+              tr
+                td
+                  | #{user.email}
+                td
+                  | #{user.isAdmin ? 'Admin' : 'User'}  
+                td
+                  a.m-1.btn.btn-primary(href='/admin/user/' + user.id, role='button')
+                    | Edit User
+                  a.m-1.btn.btn-danger(href='/admin/user/delete/' + user.id, role='button')
+                    | Delete User  
+      else
+        p.lead
+          | No users found   
+
+  .row
+    .col-md-12
+      .card
+        .card-header
+          if(!user)
+            | Create User
+          else
+            | Edit User
+
+        .card-block
+          form(method='POST', action='/admin/user' autocomplete='off')
+            input(type='hidden', name='userId', value=user ? user.id : '')
+            .form-group
+              label.form-control-label(for='email')
+                | Email Address:
+              input#email.form-control(type='email', name='email', autocomplete='off', value=user ? user.email : '')
+
+            .form-group
+              label.form-control-label(for='password')
+                | Password:
+              input#password.form-control(type='password', name='password', autocomplete='off')
+
+            // New form group for isAdmin checkbox
+            .form-group
+              label.form-control-label(for='isAdmin')
+                | Set as admin:&nbsp;
+              input#isAdmin(type='checkbox', name='isAdmin', value='true', checked=(user && user.isAdmin))
+
+            button.m-1.btn.btn-primary(type='submit')
+              | Submit
+
+            a.m-1.btn.btn-secondary(href='/admin/user', role='button')
+              | Reset

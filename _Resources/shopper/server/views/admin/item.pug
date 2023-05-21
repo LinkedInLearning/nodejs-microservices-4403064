@@ -1,0 +1,70 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-12
+      h1
+        | Manage Items
+      
+      if items && items.length
+        table.table.table-bordered.table-striped
+          thead
+            th
+              | SKU
+
+            th
+              | Name  
+
+            th
+              | Price    
+
+            th  
+              | Action
+
+          tbody
+            each item in items
+              tr
+                td=item.sku
+                td=item.name
+                td=item.price
+                td
+                  a.m-1.btn.btn-primary(href='/admin/item/' + item.id, role='button')
+                    | Edit item
+                  a.m-1.btn.btn-danger(href='/admin/item/delete/' + item.id, role='button')
+                    | Delete item  
+      else
+        p.lead
+          | No items found
+  .row
+    .col-md-12
+      .card
+        .card-header
+          if(!item)
+            | Create item
+          else
+            | Edit item
+
+        .card-block
+          form(method='POST', action='/admin/item' autocomplete='off')
+            input(type='hidden', name='itemId', value=item ? item.id : '')
+
+            .form-group
+              label.form-control-label(for='sku')
+                | SKU:
+              input#sku.form-control(type='number', name='sku', autocomplete='off', value=item ? item.sku : '')
+
+            .form-group
+              label.form-control-label(for='name')
+                | Name:
+              input#name.form-control(type='text', name='name', autocomplete='off', value=item ? item.name : '')
+
+            .form-group
+              label.form-control-label(for='price')
+                | Price:
+              input#price.form-control(type='text', name='price', autocomplete='off', value=item ? item.price : '')
+
+            button.m-1.btn.btn-primary(type='submit')
+              | Submit
+
+            a.m-1.btn.btn-secondary(href='/admin/item', role='button')
+              | Reset

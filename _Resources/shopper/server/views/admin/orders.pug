@@ -1,0 +1,69 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-12
+      h1
+        | All Orders
+      
+
+  if orders && orders.length > 0
+    table.table.table-bordered
+      thead
+        th
+          | #
+
+
+        th
+          | Status   
+
+        th
+          | Email  
+
+        th
+          | Date  
+
+        th
+          | Items    
+
+        th  
+          | Action
+      tbody
+        each order in orders
+          tr
+            td=order.id
+            td=order.status
+            td=order.email
+            td=order.createdAt
+
+            td
+              table.table.table-bordered
+                thead
+                  th
+                    | SKU
+
+                  th
+                    | Quantity  
+
+                  th
+                    | Price  
+
+                tbody
+                  each item in order.items
+                    tr
+                      td=item.sku
+                      td=item.qty
+                      td=item.price  
+
+            td
+              if order.status !== 'Shipped'
+                a.m-1.btn.btn-danger(href='/admin/orders/setshipped/' + order.id, role='button')
+                  | Set Shipped
+              else
+                a.m-1.btn.btn-danger.disabled(href='/admin/orders/setshipped/' + order.id, role='button')
+                  | Order Shipped
+
+   
+  else
+    p.lead
+      | Nothing in here.

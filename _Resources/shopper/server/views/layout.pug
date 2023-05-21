@@ -1,0 +1,96 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    
+    title #{applicationName}
+    // Bootstrap core CSS
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+    link(rel='stylesheet', href='/css/site.css')
+
+  body
+    nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
+      button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+
+      .container  
+        a.navbar-brand(href='#') #{applicationName}
+        #navbarsExampleDefault.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link(href='/')
+                | Home 
+
+            li.nav-item
+              a.nav-link(href='/shop') Shop
+
+            if(currentUser && currentUser.isAdmin)
+              li.nav-item
+                a.nav-link(href='/admin/item') Manage Items
+
+              li.nav-item
+                a.nav-link(href='/admin/orders') Manage Orders  
+
+          ul.navbar-nav.ml-auto
+
+            if !currentUser
+
+              li.nav-item
+                a.nav-link(href='#', data-toggle='modal', data-target='#loginModal') Login
+              li.nav-item
+                a.nav-link(href='/admin/user') Manage Users (Dev Only)
+            else
+
+              li.nav-item
+                a.nav-link(href='#')
+                  | Logged in as #{currentUser.email}
+              li.nav-item
+                a.nav-link(href='/user/logout') Logout
+
+              if cartCount
+                li.nav-item
+                  a.nav-link(href='/cart')
+                    if(cartCount > 1)
+                      | #{cartCount} items in cart
+                    else
+                      | #{cartCount} item in cart
+              li.nav-item
+                a.nav-link(href='/admin/user') Manage Users (Dev Only)
+    // Login modal
+    #loginModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='loginModalLabel', aria-hidden='true')
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            h5#loginModalLabel.modal-title Login
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+          .modal-body
+            form(method="POST", action="/user/login")
+              .form-group
+                label(for='email') Email address
+                input#email.form-control(type='email', name="email" placeholder='Enter email')
+              .form-group
+                label(for='password') Password
+                input#password.form-control(type='password', name="password", placeholder='Password')
+              .modal-footer
+                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                button.btn.btn-primary(type='submit') Login
+
+    .container
+
+      while messages.length > 0
+        - const message =messages.pop();
+        .alert(class='alert-dismissible fade show alert-' + message.type)
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+          | #{message.text}
+
+      block content
+
+
+  script(src='//code.jquery.com/jquery-3.1.1.slim.min.js', integrity='sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n', crossorigin='anonymous')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')

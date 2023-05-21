@@ -1,0 +1,46 @@
+extends ./layout
+
+block content
+  .row
+    .col-md-12
+      h1
+        | Your Cart
+      
+
+  if items && items.length > 0
+    table.table.table-bordered.table-striped
+      thead
+        th
+          | SKU
+
+        th
+          | Name  
+
+        th
+          | Price    
+
+        th
+          | Quantity   
+
+        th  
+          | Action
+      tbody
+        each item in items
+          tr
+            td=item.sku
+            td=item.name
+            td=item.price
+            td=item.quantity
+            td
+              a.m-1.btn.btn-danger(href='/cart/remove/' + item.id, role='button')
+                | Remove from Cart
+
+
+      tfoot
+        tr
+          td(colspan=5)
+            a.m-1.btn.btn-primary.btn-block(href='/cart/buy', role='button')
+              | Buy Now        
+  else
+    p.lead
+      | Nothing in here.

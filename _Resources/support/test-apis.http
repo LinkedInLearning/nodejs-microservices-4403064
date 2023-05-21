@@ -1,0 +1,76 @@
+// Testing the catalog-service - make sure to update the port
+@catalog-service-port = 56800
+
+##
+GET http://localhost:{{catalog-service-port}}/items
+
+###
+# @prompt item-id
+GET http://localhost:{{catalog-service-port}}/items/{{item-id}}
+
+###
+# @prompt item-sku
+# @prompt item-name
+# @prompt item-price
+POST  http://localhost:{{catalog-service-port}}/items
+content-type: application/json
+
+{
+    "sku": {{item-sku}},
+    "name": "{{item-name}}",
+    "price": {{item-price}}
+}
+
+// Updating an existing item
+###
+# @prompt item-id
+# @prompt new-price
+PUT http://localhost:{{catalog-service-port}}/items/{{item-id}}
+content-type: application/json
+
+{
+    "price": {{new-price}}
+}
+
+
+// Registering services
+###
+PUT http://localhost:3080/register/myservice/1.1.0/3000
+
+###
+PUT http://localhost:3080/register/myservice/2.0.1/3001
+
+###
+PUT http://localhost:3080/register/myservice/1.1.1/3002
+
+###
+PUT http://localhost:3080/register/myservice/1.2.1/3003 
+
+###
+PUT http://localhost:3080/register/myotherservice/0.0.1/5003 
+
+
+// Querying the registry
+###
+GET http://localhost:3080/find/myservice/1
+
+###
+GET http://localhost:3080/find/myservice/2
+
+
+// This shows you how you get random services because of the wildcard version - try it a few times
+###
+GET http://localhost:3080/find/myservice/*
+
+###
+GET http://localhost:3080/find/myotherservice/*
+
+
+// Unregistering a service
+###
+DELETE http://localhost:3080/register/myotherservice/0.0.1/5003 
+
+
+// Test if it's gone
+###
+GET http://localhost:3080/find/myotherservice/*
