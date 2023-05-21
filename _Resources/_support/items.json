@@ -1,0 +1,18 @@
+[
+    { "sku": "001", "name": "Bug Repellent Spray for Developers", "price": 19.99 },
+    { "sku": "002", "name": "Microservice Jigsaw Puzzles", "price": 14.99 },
+    { "sku": "003", "name": "\"Decompose Monolith\" Hammer", "price": 9.99 },
+    { "sku": "004", "name": "Load Balancer Scale", "price": 24.99 },
+    { "sku": "005", "name": "Fault Isolation T-Shirts", "price": 29.99 },
+    { "sku": "006", "name": "Distributed System Domino Sets", "price": 39.99 },
+    { "sku": "007", "name": "Microservice Magic 8 Ball", "price": 14.99 },
+    { "sku": "008", "name": "API Gateway Keyring", "price": 9.99 },
+    { "sku": "009", "name": "Container Ornaments", "price": 14.99 },
+    { "sku": "010", "name": "\"Database Sharding\" Glassware", "price": 19.99 },
+    { "sku": "011", "name": "Serverless Stress Balls", "price": 12.99 },
+    { "sku": "012", "name": "Replica Set Twinsies Outfit", "price": 24.99 },
+    { "sku": "013", "name": "Scalability Elastic Bands", "price": 4.99 },
+    { "sku": "014", "name": "Circuit Breaker Switch Toys", "price": 19.99 },
+    { "sku": "015", "name": "Rate Limiter Hourglass", "price": 24.99 }
+  ]
+  
