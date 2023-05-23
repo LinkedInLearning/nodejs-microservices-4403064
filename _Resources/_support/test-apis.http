@@ -1,5 +1,5 @@
 // Testing the catalog-service - make sure to update the port
-@catalog-service-port = 56800
+@catalog-service-port = 50169
 
 ##
 GET http://localhost:{{catalog-service-port}}/items
@@ -32,6 +32,9 @@ content-type: application/json
     "price": {{new-price}}
 }
 
+###
+# @prompt item-id
+DELETE http://localhost:{{catalog-service-port}}/items/{{item-id}}
 
 // Registering services
 ###
