@@ -30,3 +30,33 @@ git config --bool core.bare false
 git reset --hard
 git branch
 ```
+
+# Middleware to convert IPv6 mapped addresses to IPv4
+
+```js
+const net = require("net);
+
+router.use((req, res, next) => {
+  const { ip } = req;
+
+  // Check if IP is an IPv6 address
+  if (net.isIPv6(ip)) {
+    const ipArr = ip.split(":");
+    // Check if this is an IPv4-mapped IPv6 address
+    if (
+      ipArr[0] === "" &&
+      ipArr[1] === "" &&
+      ipArr[2] === "" &&
+      ipArr[3] === "" &&
+      ipArr[4] === "" &&
+      ipArr[5] === "ffff"
+    ) {
+      const ipV4mapped = ipArr.slice(-2).join(":");
+      const octets = ipV4mapped.split(".").map((octet) => parseInt(octet, 16));
+
+      // Remap it back to IPv4
+      req.ip = octets.join(".");
+    }
+  }
+  next();
+});
