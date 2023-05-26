@@ -5,8 +5,7 @@ class Registry {
   }
 
   register(name, version, ip, port) {
-    const key = name + version + ip + port; // This will be the key that we will use to store the service
-
+    const key = name + version + ip + port;
     if (!this.services[key]) {
       this.services[key] = {};
       this.services[key].timestamp = Math.floor(new Date() / 1000);
