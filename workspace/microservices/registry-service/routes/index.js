@@ -10,7 +10,10 @@ router.put(
   "/register/:servicename/:serviceversion/:serviceport",
   (req, res, next) => {
     const { servicename, serviceversion, serviceport } = req.params;
-    const serviceip = req.ip;
+    let serviceip = req.ip;
+    if (serviceip.includes("::1") || serviceip.includes("::ffff:127.0.0.1")) {
+      serviceip = "127.0.0.1";
+    }
     const key = registry.register(
       servicename,
       serviceversion,
