@@ -11,7 +11,18 @@ class Registry {
     return name + version + ip + port;
   }
 
+  cleanup() {
+    const now = Math.floor(new Date() / 1000);
+    Object.keys(this.services).forEach((key) => {
+      if (this.services[key].timestamp + this.timeout < now) {
+        delete this.services[key];
+        console.log(`Removed expired service ${key}`);
+      }
+    });
+  }
+
   get(name, version) {
+    this.cleanup();
     const candidates = Object.values(this.services).filter((service) => {
       return (
         service.name === name && semver.satisfies(service.version, version)
@@ -21,6 +32,7 @@ class Registry {
   }
 
   register(name, version, ip, port) {
+    this.cleanup();
     const key = this.getKey(name, version, ip, port);
     if (!this.services[key]) {
       this.services[key] = {};
