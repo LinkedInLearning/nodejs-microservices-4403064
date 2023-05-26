@@ -10,14 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "morgan": "^1.10.0",
-    "semver": "^7.5.1",
     "@opentelemetry/api": "^1.4.1",
     "@opentelemetry/auto-instrumentations-node": "^0.37.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.39.1",
     "@opentelemetry/sdk-metrics": "^1.13.0",
-    "@opentelemetry/sdk-node": "^0.39.1"
+    "@opentelemetry/sdk-node": "^0.39.1",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "semver": "^7.5.1"
   },
   "devDependencies": {
     "eslint": "^7.32.0",

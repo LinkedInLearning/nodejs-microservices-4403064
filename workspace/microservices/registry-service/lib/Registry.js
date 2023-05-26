@@ -1,3 +1,5 @@
+const semver = require("semver");
+
 class Registry {
   constructor() {
     this.services = [];
@@ -7,6 +9,15 @@ class Registry {
   // eslint-disable-next-line class-methods-use-this
   getKey(name, version, ip, port) {
     return name + version + ip + port;
+  }
+
+  get(name, version) {
+    const candidates = Object.values(this.services).filter((service) => {
+      return (
+        service.name === name && semver.satisfies(service.version, version)
+      );
+    });
+    return candidates[Math.floor(Math.random() * candidates.length)];
   }
 
   register(name, version, ip, port) {

@@ -46,7 +46,12 @@ router.delete(
 );
 
 router.get("/find/:servicename/:serviceversion", (req, res, next) => {
-  return next("Not implemented");
+  const { servicename, serviceversion } = getRequestArguments(req);
+  const service = registry.get(servicename, serviceversion);
+  if (!service) {
+    return res.status(404).json({ error: "No matching service found." });
+  }
+  return res.json(service);
 });
 
 module.exports = router;
