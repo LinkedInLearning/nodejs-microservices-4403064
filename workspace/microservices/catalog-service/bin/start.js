@@ -11,6 +11,8 @@ const tracing = require("../lib/tracing")(
   `${config.serviceName}:${config.serviceVersion}`
 );
 
+const axios = require("axios");
+
 // Import necessary dependencies
 const http = require("http"); // HTTP server functionality
 
@@ -30,6 +32,17 @@ const server = http.createServer(app);
 server.on("listening", () => {
   const addr = server.address();
   const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
+
+  const register = async () =>
+    axios
+      .put(
+        `http://127.0.0.1:3080/register/${config.serviceName}/${
+          config.serviceVersion
+        }/${server.address().port}`
+      )
+      .catch((err) => console.error(err));
+  register();
+
   console.info(
     `${config.serviceName}:${config.serviceVersion} listening on ${bind}`
   );
