@@ -1,6 +1,6 @@
 /** @module UserService */
 
-const RegistryClient = require("./ServiceClient");
+const ServiceClient = require("./ServiceClient");
 
 /**
  * Service class for managing users
@@ -12,7 +12,7 @@ class UserServiceClient {
    */
   static async getAll() {
     try {
-      return RegistryClient.callService("user-service", {
+      return ServiceClient.callService("user-service", {
         method: "get",
         url: `/users`
       });
@@ -30,7 +30,7 @@ class UserServiceClient {
    */
   static async getOne(userId) {
     try {
-      return RegistryClient.callService("user-service", {
+      return ServiceClient.callService("user-service", {
         method: "get",
         url: `/users/${userId}`
       });
@@ -47,7 +47,7 @@ class UserServiceClient {
    */
   static async create(data) {
     try {
-      return RegistryClient.callService("user-service", {
+      return ServiceClient.callService("user-service", {
         method: "post",
         url: `/users`,
         data
@@ -66,7 +66,7 @@ class UserServiceClient {
    */
   static async update(userId, data) {
     try {
-      return RegistryClient.callService("user-service", {
+      return ServiceClient.callService("user-service", {
         method: "put",
         url: `/users/${userId}`,
         data
@@ -85,7 +85,7 @@ class UserServiceClient {
    */
   static async remove(userId) {
     try {
-      return RegistryClient.callService("user-service", {
+      return ServiceClient.callService("user-service", {
         method: "delete",
         url: `/users/${userId}`
       });
