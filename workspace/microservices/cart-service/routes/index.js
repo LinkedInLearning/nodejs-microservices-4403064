@@ -27,7 +27,7 @@ router.post("/items/:userId", async (req, res) => {
 router.delete("/items/:userId/:itemId", async (req, res) => {
   try {
     await CartService.remove(req.params.userId, req.params.itemId);
-    res.status(204).send();
+    return res.status(204).send();
   } catch (error) {
     console.error(error);
     return res.status(500).send("General error");

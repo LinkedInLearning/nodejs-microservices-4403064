@@ -2,7 +2,7 @@
 const express = require("express");
 
 const CatalogService = require("../../services/CatalogClient");
-const CartService = require("../../services/CartService");
+const CartService = require("../../services/CartServiceClient");
 const OrderService = require("../../services/OrderService");
 
 // Instantiate a new Express router

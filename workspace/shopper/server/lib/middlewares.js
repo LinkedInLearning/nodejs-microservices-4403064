@@ -1,5 +1,5 @@
 const UserService = require("../services/UserService");
-const CartService = require("../services/CartService");
+const CartService = require("../services/CartServiceClient");
 const config = require("../config");
 
 module.exports.assignTemplateVariables = async (req, res, next) => {
