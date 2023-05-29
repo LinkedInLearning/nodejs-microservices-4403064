@@ -1,6 +1,6 @@
 /** @module UserService */
 
-const RegistryClient = require("./RegistryClient");
+const RegistryClient = require("./ServiceClient");
 
 /**
  * Service class for managing users
