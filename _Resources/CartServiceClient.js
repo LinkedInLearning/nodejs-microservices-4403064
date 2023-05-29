@@ -21,7 +21,7 @@ class CartServiceClient {
    * @returns {Promise<number>} - A promise that resolves to the new quantity of
    * the item in the cart
    */
-  static async add(itemId, userId) {
+  static async add(userId, itemId) {
     try {
       return ServiceClient.callService("cart-service", {
         method: "post",
