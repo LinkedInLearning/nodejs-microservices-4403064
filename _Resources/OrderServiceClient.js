@@ -1,5 +1,5 @@
 /** @module OrderService */
-const RegistryClient = require("./ServiceClient");
+const ServiceClient = require("./ServiceClient");
 
 /**
  * Service class for managing orders
@@ -12,7 +12,7 @@ class OrderServiceClient {
    * @returns {Promise<Object>} - A promise that resolves to the new order
    */
   static async create(userId, email, items) {
-    return RegistryClient.callService("order-service", {
+    return ServiceClient.callService("order-service", {
       method: "post",
       url: `/orders`,
       data: { userId, email, items }
@@ -25,7 +25,7 @@ class OrderServiceClient {
    */
   static async getAll() {
     try {
-      return RegistryClient.callService("order-service", {
+      return ServiceClient.callService("order-service", {
         method: "get",
         url: `/orders`
       });
@@ -43,7 +43,7 @@ class OrderServiceClient {
    * order, or null if no order was found
    */
   static async setStatus(orderId, status) {
-    return RegistryClient.callService("order-service", {
+    return ServiceClient.callService("order-service", {
       method: "put",
       url: `/orders/${orderId}`,
       data: { status }
