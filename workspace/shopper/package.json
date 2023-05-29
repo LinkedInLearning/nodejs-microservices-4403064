@@ -8,6 +8,11 @@
     "dev": "nodemon ./server/bin/start"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.4.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.37.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.39.1",
+    "@opentelemetry/sdk-metrics": "^1.13.0",
+    "@opentelemetry/sdk-node": "^0.39.1",
     "@redis/client": "^1.5.7",
     "axios": "^1.4.0",
     "body-parser": "~1.20.2",
@@ -18,12 +23,7 @@
     "mongoose": "^7.1.1",
     "morgan": "^1.10.0",
     "pug": "~3.0.2",
-    "redis": "^4.6.6",
-    "@opentelemetry/api": "^1.4.1",
-    "@opentelemetry/auto-instrumentations-node": "^0.37.0",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.39.1",
-    "@opentelemetry/sdk-metrics": "^1.13.0",
-    "@opentelemetry/sdk-node": "^0.39.1"
+    "redis": "^4.6.6"
   },
   "devDependencies": {
     "eslint": "^8.40.0",
