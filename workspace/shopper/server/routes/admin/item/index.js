@@ -1,6 +1,6 @@
 // Import necessary modules
 const express = require("express");
-const CatalogService = require("../../../services/CatalogService");
+const CatalogService = require("../../../services/CatalogClient");
 
 // Create a new Express router
 const router = express.Router();

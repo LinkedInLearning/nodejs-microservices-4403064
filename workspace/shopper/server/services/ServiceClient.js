@@ -1,7 +1,7 @@
 const axios = require("axios");
 const config = require("../config");
 
-class RegistryClient {
+class ServiceClient {
   static async getService(servicename) {
     try {
       const response = await axios.get(
@@ -37,4 +37,4 @@ class RegistryClient {
   }
 }
 
-module.exports = RegistryClient;
+module.exports = ServiceClient;

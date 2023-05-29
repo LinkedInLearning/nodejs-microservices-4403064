@@ -1,7 +1,7 @@
 // Import required modules
 const express = require("express");
 
-const CatalogService = require("../../services/CatalogService");
+const CatalogService = require("../../services/CatalogClient");
 const CartService = require("../../services/CartService");
 const OrderService = require("../../services/OrderService");
 
