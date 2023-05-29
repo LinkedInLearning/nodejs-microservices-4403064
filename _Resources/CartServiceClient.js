@@ -23,7 +23,7 @@ class CartServiceClient {
    */
   static async add(itemId, userId) {
     try {
-      return RegistryClient.callService("cart-service", {
+      return ServiceClient.callService("cart-service", {
         method: "post",
         url: `/items/${userId}`,
         data: { itemId }
@@ -41,7 +41,7 @@ class CartServiceClient {
    */
   static async getAll(userId) {
     try {
-      return RegistryClient.callService("cart-service", {
+      return ServiceClient.callService("cart-service", {
         method: "get",
         url: `/items/${userId}`
       });
@@ -59,7 +59,7 @@ class CartServiceClient {
    */
   static async remove(userId, itemId) {
     try {
-      return RegistryClient.callService("cart-service", {
+      return ServiceClient.callService("cart-service", {
         method: "delete",
         url: `/items/${userId}/${itemId}`
       });
