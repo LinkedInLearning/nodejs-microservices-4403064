@@ -1,7 +1,7 @@
 /** @module CatalogService */
 
-const RegistryClient = require("./ServiceClient");
-const ServiceClient = require("./ServiceClient");
+// Import the Item model from mongoose
+const ItemModel = require("../models/Item");
 
 /**
  * Service class for interacting with the Item catalog
@@ -12,16 +12,7 @@ class CatalogService {
    * @returns {Promise<Array>} - A promise that resolves to an array of Items
    */
   static async getAll() {
-    try {
-      const result = await RegistryClient.callService("catalog-service", {
-        method: "get",
-        url: "/items"
-      });
-      return result;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
+    return ItemModel.find({}).sort({ createdAt: -1 }).exec();
   }
 
   /**
@@ -30,16 +21,7 @@ class CatalogService {
    * @returns {Promise<Object>} - A promise that resolves to an Item object
    */
   static async getOne(itemId) {
-    try {
-      const result = await RegistryClient.callService("catalog-service", {
-        method: "get",
-        url: `/items/${itemId}`
-      });
-      return result;
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
+    return ItemModel.findById(itemId).exec();
   }
 
   /**
@@ -48,17 +30,8 @@ class CatalogService {
    * @returns {Promise<Object>} - A promise that resolves to the new Item object
    */
   static async create(data) {
-    try {
-      const result = await RegistryClient.callService("catalog-service", {
-        method: "post",
-        url: `/items`,
-        data
-      });
-      return result;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
+    const item = new ItemModel(data);
+    return item.save();
   }
 
   /**
@@ -68,17 +41,7 @@ class CatalogService {
    * @returns {Promise<Object|null>} - A promise that resolves to the updated Item object, or null if no item was found
    */
   static async update(itemId, data) {
-    try {
-      const result = await RegistryClient.callService("catalog-service", {
-        method: "put",
-        url: `/items/${itemId}`,
-        data
-      });
-      return result;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
+    return ItemModel.findByIdAndUpdate(itemId, data, { new: true }).exec();
   }
 
   /**
@@ -87,16 +50,7 @@ class CatalogService {
    * @returns {Promise<Object>} - A promise that resolves to the deletion result
    */
   static async remove(itemId) {
-    try {
-      const result = await RegistryClient.callService("catalog-service", {
-        method: "delete",
-        url: `/items/${itemId}`
-      });
-      return result;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
+    return ItemModel.deleteOne({ _id: itemId }).exec();
   }
 }
 
