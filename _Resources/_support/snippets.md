@@ -6,7 +6,7 @@ Please note, that your repository url is different if you decided to fork the re
 In this case, please use the URL as shown under the <> Code button on the forked repository page.
 
 ```bash
-git clone --bare https://github.com/LinkedInLearning/nodejs-microservices-4403064 .git .git
+git clone --bare git@github.com:/LinkedInLearning/nodejs-microservices-4403064.git .git
 git config --bool core.bare false
 git reset --hard
 git branch
