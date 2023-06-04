@@ -96,4 +96,4 @@ class UserServiceClient {
   }
 }
 
-module.exports = UserService;
+module.exports = UserServiceClient;
