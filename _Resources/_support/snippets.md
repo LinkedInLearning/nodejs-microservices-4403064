@@ -20,6 +20,9 @@ docker run --name jaeger \
   -d jaegertracing/all-in-one:1.45
 ```
 
+# Start RabbitMQ Management Interface
+http://localhost:15672/ user: guest, password: guest
+
 ## Cloning the Exercise Files from GitHub
 Please note, that your repository url is different if you decided to fork the repo.
 In this case, please use the URL as shown under the <> Code button on the forked repository page.
