@@ -1,6 +1,6 @@
 // Import necessary modules
 const express = require("express");
-const OrderService = require("../../../services/OrderService");
+const OrderService = require("../../../services/OrderServiceClient");
 
 // Create a new Express router
 const router = express.Router();
