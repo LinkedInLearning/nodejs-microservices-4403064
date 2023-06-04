@@ -15,7 +15,7 @@ class UserServiceClient {
    */
   static async authenticate(email, password) {
     try {
-      return RegistryClient.callService("user-service", {
+      return ServiceClient.callService("user-service", {
         method: "post",
         url: `/users/authenticate`,
         data: { email, password }
