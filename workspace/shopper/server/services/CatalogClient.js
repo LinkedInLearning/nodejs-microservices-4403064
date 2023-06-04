@@ -46,12 +46,13 @@ class CatalogClient {
    * @param {Object} data - The data for the new item
    * @returns {Promise<Object>} - A promise that resolves to the new Item object
    */
-  static async create(data) {
+  static async create(data, token) {
     try {
       const result = await ServiceClient.callService("catalog-service", {
         method: "post",
         url: `/items`,
-        data
+        data,
+        headers: { Authorization: `Bearer ${token}` }
       });
       return result;
     } catch (error) {
@@ -66,12 +67,13 @@ class CatalogClient {
    * @param {Object} data - The new data for the item
    * @returns {Promise<Object|null>} - A promise that resolves to the updated Item object, or null if no item was found
    */
-  static async update(itemId, data) {
+  static async update(itemId, data, token) {
     try {
       const result = await ServiceClient.callService("catalog-service", {
         method: "put",
         url: `/items/${itemId}`,
-        data
+        data,
+        headers: { Authorization: `Bearer ${token}` }
       });
       return result;
     } catch (error) {
@@ -85,11 +87,12 @@ class CatalogClient {
    * @param {string} itemId - The id of the item to remove
    * @returns {Promise<Object>} - A promise that resolves to the deletion result
    */
-  static async remove(itemId) {
+  static async remove(itemId, token) {
     try {
       const result = await ServiceClient.callService("catalog-service", {
         method: "delete",
-        url: `/items/${itemId}`
+        url: `/items/${itemId}`,
+        headers: { Authorization: `Bearer ${token}` }
       });
       return result;
     } catch (error) {
