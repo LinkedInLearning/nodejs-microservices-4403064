@@ -1,6 +1,6 @@
 // Required modules and services are imported
 const express = require("express");
-const UserService = require("../../services/UserService");
+const UserService = require("../../services/UserServiceClient");
 
 // Express router is instantiated
 const router = express.Router();

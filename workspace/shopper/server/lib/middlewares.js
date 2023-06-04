@@ -1,4 +1,4 @@
-const UserService = require("../services/UserService");
+const UserService = require("../services/UserServiceClient");
 const CartService = require("../services/CartServiceClient");
 const config = require("../config");
 
