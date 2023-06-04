@@ -51,4 +51,4 @@ class OrderServiceClient {
   }
 }
 
-module.exports = OrderService;
+module.exports = OrderServiceClient;
