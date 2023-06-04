@@ -2,6 +2,8 @@
 
 const ServiceClient = require("./ServiceClient");
 
+let allItemsCache = [];
+
 /**
  * Service class for interacting with the Item catalog
  */
@@ -16,10 +18,11 @@ class CatalogClient {
         method: "get",
         url: `/items`
       });
+      allItemsCache = result;
       return result;
     } catch (error) {
       console.error(error);
-      return [];
+      return allItemsCache;
     }
   }
 
