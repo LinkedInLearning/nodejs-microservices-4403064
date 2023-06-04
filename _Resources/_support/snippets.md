@@ -19,16 +19,19 @@ docker run --name jaeger \
   -p 4318:4318 \
   -d jaegertracing/all-in-one:1.45
 ```
+UI: http://localhost:16686
 
-# Start RabbitMQ Management Interface
-http://localhost:15672/ user: guest, password: guest
+## Start RabbitMQ in Docker
+`docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management`
+
+Management interface: http://localhost:15672/ user: guest, password: guest
 
 ## Cloning the Exercise Files from GitHub
 Please note, that your repository url is different if you decided to fork the repo.
 In this case, please use the URL as shown under the <> Code button on the forked repository page.
 
 ```bash
-git clone --bare https://github.com/LinkedInLearning/nodejs-microservices-4403064.git .git
+git clone --bare https://github.com/LinkedInLearning/nodejs-microservices-4403064 .git .git
 git config --bool core.bare false
 git reset --hard
 git branch
