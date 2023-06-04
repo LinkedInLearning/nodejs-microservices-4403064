@@ -14,6 +14,7 @@
     "@opentelemetry/sdk-metrics": "^1.13.0",
     "@opentelemetry/sdk-node": "^0.39.1",
     "@redis/client": "^1.5.7",
+    "amqplib": "^0.10.3",
     "axios": "^1.4.0",
     "body-parser": "~1.20.2",
     "connect-redis": "^7.1.0",
