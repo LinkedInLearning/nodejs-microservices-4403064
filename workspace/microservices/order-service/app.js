@@ -1,9 +1,11 @@
 const express = require("express");
+const amqp = require("amqplib");
 
 const app = express();
 const morgan = require("morgan");
 const routes = require("./routes");
 const config = require("./config");
+const OrderService = require("./lib/OrderService");
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -28,5 +30,27 @@ app.use((err, req, res, next) => {
     }
   });
 });
+
+(async () => {
+  try {
+    const connection = await amqp.connect("amqp://127.0.0.1");
+    const channel = await connection.createChannel();
+    const queue = "orders";
+    await channel.assertQueue(queue, { durable: true });
+    console.log(" [x] Waiting for messages in %s.", queue);
+    channel.consume(
+      queue,
+      async (message) => {
+        const order = JSON.parse(message.content.toString());
+        console.log(" [x] Received %s", JSON.stringify(order));
+        await OrderService.create(order.userId, order.email, order.items);
+        channel.ack(message);
+      },
+      { noAck: false }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+})();
 
 module.exports = app;
