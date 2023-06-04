@@ -22,7 +22,7 @@ docker run --name jaeger \
 UI: http://localhost:16686
 
 ## Start RabbitMQ in Docker
-`docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management`
+`docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 -d rabbitmq:3.11-management`
 
 Management interface: http://localhost:15672/ user: guest, password: guest
 
