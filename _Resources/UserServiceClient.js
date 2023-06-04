@@ -6,6 +6,26 @@ const ServiceClient = require("./ServiceClient");
  * Service class for managing users
  */
 class UserServiceClient {
+
+  /**
+   * Authenticate a user
+   * @param {string} email - The email address
+   * @param {string} password - The email password
+   * @returns {Promise<Object>} - A promise that either returns the authenticated user or null
+   */
+  static async authenticate(email, password) {
+    try {
+      return RegistryClient.callService("user-service", {
+        method: "post",
+        url: `/users/authenticate`,
+        data: { email, password }
+      });
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+
   /**
    * Get all users
    * @returns {Promise<Array>} - A promise that resolves to an array of users
